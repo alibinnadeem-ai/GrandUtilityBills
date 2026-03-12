@@ -33,6 +33,34 @@ This guide will help you deploy the Grand City Dashboard with Neon PostgreSQL da
    ```
 
 ### 1.3 Run Database Schema
+1. Go to **SQL Editor** in Neon console
+2. Copy the entire contents of `database/schema.sql`
+3. Paste it into the SQL Editor
+4. Click **Run** or press `Ctrl+Enter`
+
+This will create all tables, indexes, and triggers needed for the application.
+
+### 1.4 Seed Initial Data (Recommended)
+
+After creating the schema, seed your data from the `SeedData/` folder:
+
+1. Check database status (optional):
+   ```bash
+   curl https://your-app.vercel.app/api/seed-all?action=status
+   ```
+
+2. Seed all data from SeedData folder:
+   ```bash
+   curl -X POST https://your-app.vercel.app/api/seed-all?action=all
+   ```
+
+This will seed:
+- **4 owners** (Brig Shahid, Fareed Faridi, Waseem Ijaz, Grand City HQ)
+- **28+ bills** (Electricity, PTCL, Gas, Water from complete data)
+- **Additional bills** from other JSON files
+- **Reference data** for tracking old account numbers
+
+See `SEED_DATA_GUIDE.md` for detailed seeding instructions.
 
 1. Go to the **SQL Editor** in Neon console
 2. Copy the entire contents of `database/schema.sql`

@@ -154,6 +154,14 @@ export const seedApi = {
   }),
 };
 
+// Seed All API (comprehensive - reads from SeedData folder)
+export const seedAllApi = {
+  status: () => apiRequest('/api/seed-all?action=status'),
+  seedAll: (action = 'all') => apiRequest(`/api/seed-all?action=${action}`, {
+    method: 'POST',
+  }),
+};
+
 // Export all APIs
 export default {
   bills: billsApi,

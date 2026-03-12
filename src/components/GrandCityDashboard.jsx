@@ -844,8 +844,8 @@ const GrandCityManagementComplete = () => {
                       </div>
                       <div className="flex justify-between bg-white/5 rounded p-2">
                         <span className="text-white/70 text-sm">Overdue</span>
-                        <span className={`font-bold ${overdueBills > 0 ? 'text-red-300' : 'text-green-300'}`}>
-                          {overdueBills}
+                        <span className={`font-bold ${overdueBills.length > 0 ? 'text-red-300' : 'text-green-300'}`}>
+                          {overdueBills.length}
                         </span>
                       </div>
                       <div className="flex justify-between bg-white/5 rounded p-2">

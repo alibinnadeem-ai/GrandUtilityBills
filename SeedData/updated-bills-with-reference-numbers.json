@@ -1,0 +1,132 @@
+{
+  "eurobizCorporation": [
+    {
+      "location": "Plaza 171",
+      "referenceNumber": "44115635517100 U",
+      "oldAccountNumber": "0.00",
+      "buildingNumber": "171",
+      "buildingName": "Plaza",
+      "floor": "",
+      "company": "Eurobiz Corporation"
+    },
+    {
+      "location": "170 Ground Floor",
+      "referenceNumber": "44115635501709 U",
+      "oldAccountNumber": "44115638001710.00",
+      "buildingNumber": "170",
+      "buildingName": "Plaza",
+      "floor": "Ground Floor",
+      "company": "Eurobiz Corporation"
+    },
+    {
+      "location": "Plaza 172 3rd Floor",
+      "referenceNumber": "44115635517215 U",
+      "oldAccountNumber": "44115638017215.00",
+      "buildingNumber": "172",
+      "buildingName": "Plaza",
+      "floor": "3rd Floor",
+      "company": "Eurobiz Corporation"
+    },
+    {
+      "location": "Plaza 171",
+      "referenceNumber": "44115635517101 U",
+      "oldAccountNumber": "0.00",
+      "buildingNumber": "171",
+      "buildingName": "Plaza",
+      "floor": "",
+      "company": "Eurobiz Corporation"
+    },
+    {
+      "location": "Plaza 170 2nd Floor",
+      "referenceNumber": "44115635517004 U",
+      "oldAccountNumber": "44115638017004.00",
+      "buildingNumber": "170",
+      "buildingName": "Plaza",
+      "floor": "2nd Floor",
+      "company": "Eurobiz Corporation"
+    },
+    {
+      "location": "Plaza 170 1st Floor",
+      "referenceNumber": "44115635517001 U",
+      "oldAccountNumber": "44115638017001.00",
+      "buildingNumber": "170",
+      "buildingName": "Plaza",
+      "floor": "1st Floor",
+      "company": "Eurobiz Corporation"
+    },
+    {
+      "location": "Plaza 170 Basement",
+      "referenceNumber": "44115635517006 U",
+      "oldAccountNumber": "44115638017006.00",
+      "buildingNumber": "170",
+      "buildingName": "Plaza",
+      "floor": "Basement",
+      "company": "Eurobiz Corporation"
+    },
+    {
+      "location": "Lift Plaza 171",
+      "referenceNumber": "44115635517104 U",
+      "oldAccountNumber": "0.00",
+      "buildingNumber": "171",
+      "buildingName": "Plaza",
+      "floor": "Lift",
+      "company": "Eurobiz Corporation"
+    },
+    {
+      "location": "Lift Plaza 170",
+      "referenceNumber": "44115635517000 U",
+      "oldAccountNumber": "44115638017000.00",
+      "buildingNumber": "170",
+      "buildingName": "Plaza",
+      "floor": "Lift",
+      "company": "Eurobiz Corporation"
+    }
+  ],
+  "guardianDeveloper": [
+    {
+      "location": "Plaza # 172 Basement",
+      "referenceNumber": "44563551721200",
+      "oldAccountNumber": "44563551721200",
+      "buildingNumber": "172",
+      "buildingName": "Plaza",
+      "floor": "Basement",
+      "company": "Guardian Developer"
+    },
+    {
+      "location": "Plaza # 172 3rd Floor",
+      "referenceNumber": "44115635517213.00",
+      "oldAccountNumber": "44115635517213.00",
+      "buildingNumber": "172",
+      "buildingName": "Plaza",
+      "floor": "3rd Floor",
+      "company": "Guardian Developer"
+    },
+    {
+      "location": "Plaza # 172 2nd Floor",
+      "referenceNumber": "44115638017210.00",
+      "oldAccountNumber": "44115638017210.00",
+      "buildingNumber": "172",
+      "buildingName": "Plaza",
+      "floor": "2nd Floor",
+      "company": "Guardian Developer"
+    },
+    {
+      "location": "Plaza # 172 1st Floor",
+      "referenceNumber": "44115635517211.00",
+      "oldAccountNumber": "44115635517211.00",
+      "buildingNumber": "172",
+      "buildingName": "Plaza",
+      "floor": "1st Floor",
+      "company": "Guardian Developer"
+    },
+    {
+      "location": "Plaza # 170 4th Floor",
+      "referenceNumber": "44115638017003.00",
+      "oldAccountNumber": "44115638017003.00",
+      "buildingNumber": "170",
+      "buildingName": "Plaza",
+      "floor": "4th Floor",
+      "company": "Guardian Developer"
+    }
+  ]
+}

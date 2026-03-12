@@ -1,0 +1,92 @@
+[
+  {
+    "location": "Plaza 170",
+    "customerId": "100005781802",
+    "referenceNumber": "707285437623",
+    "billType": "PTCL Bill",
+    "companyName": "Eurobiz Corporation",
+    "buildingNumber": "170",
+    "buildingName": "Plaza",
+    "floor": ""
+  },
+  {
+    "location": "Plaza 170 Ground Floor",
+    "customerId": "100005781834",
+    "referenceNumber": "701851701346",
+    "billType": "PTCL Bill",
+    "companyName": "Eurobiz Corporation",
+    "buildingNumber": "170",
+    "buildingName": "Plaza",
+    "floor": "Ground Floor"
+  },
+  {
+    "location": "Plaza 170 Ground Floor",
+    "customerId": "100004975631",
+    "referenceNumber": "701851701346",
+    "billType": "PTCL Bill",
+    "companyName": "Eurobiz Corporation",
+    "buildingNumber": "170",
+    "buildingName": "Plaza",
+    "floor": "Ground Floor"
+  },
+  {
+    "location": "Plaza 170 Ground Floor",
+    "customerId": "100004506783",
+    "referenceNumber": "701851701346",
+    "billType": "PTCL Bill",
+    "companyName": "Eurobiz Corporation",
+    "buildingNumber": "170",
+    "buildingName": "Plaza",
+    "floor": "Ground Floor"
+  },
+  {
+    "location": "Plaza 170 Ground Floor",
+    "customerId": "10000451500",
+    "referenceNumber": "701851701346",
+    "billType": "PTCL Bill",
+    "companyName": "Eurobiz Corporation",
+    "buildingNumber": "170",
+    "buildingName": "Plaza",
+    "floor": "Ground Floor"
+  },
+  {
+    "location": "Plaza 170",
+    "customerId": "100003069397",
+    "referenceNumber": "701851701346",
+    "billType": "PTCL Bill",
+    "companyName": "Eurobiz Corporation",
+    "buildingNumber": "170",
+    "buildingName": "Plaza",
+    "floor": ""
+  },
+  {
+    "location": "38 N CANTT VIEW",
+    "customerId": "7095254",
+    "referenceNumber": "9115610437705",
+    "billType": "Electricty Bill",
+    "companyName": "Eurobiz Corporation",
+    "buildingNumber": "38",
+    "buildingName": "N CANTT VIEW",
+    "floor": ""
+  },
+  {
+    "location": "129/7 D",
+    "customerId": "526712",
+    "referenceNumber": "408769",
+    "billType": "Electricty Bill",
+    "companyName": "Eurobiz Corporation",
+    "buildingNumber": "",
+    "buildingName": "",
+    "floor": ""
+  },
+  {
+    "location": "Plaza 170",
+    "customerId": "92640918956",
+    "referenceNumber": "926081113126",
+    "billType": "Gas Bill",
+    "companyName": "Eurobiz Corporation",
+    "buildingNumber": "170",
+    "buildingName": "Plaza",
+    "floor": ""
+  }
+]

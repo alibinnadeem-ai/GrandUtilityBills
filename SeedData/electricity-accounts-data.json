@@ -1,0 +1,76 @@
+{
+  "eurobiz_corporation": [
+    {
+      "location": "Plaza 171",
+      "referenceNumber": "44115635517100 U",
+      "oldAccountNumber": "0.00"
+    },
+    {
+      "location": "170 GROUND FLOOR",
+      "referenceNumber": "44115635501709 U",
+      "oldAccountNumber": "44115638001710.00"
+    },
+    {
+      "location": "PLAZA 172 3RD FLOOR",
+      "referenceNumber": "44115635517215 U",
+      "oldAccountNumber": "44115638017215.00"
+    },
+    {
+      "location": "PLAZA 171",
+      "referenceNumber": "44115635517101 U",
+      "oldAccountNumber": "0.00"
+    },
+    {
+      "location": "PLAZA 170 2ND FLOOR",
+      "referenceNumber": "44115635517004 U",
+      "oldAccountNumber": "44115638017004.00"
+    },
+    {
+      "location": "PLAZA 170 1ST FLOOR",
+      "referenceNumber": "44115635517001 U",
+      "oldAccountNumber": "44115638017001.00"
+    },
+    {
+      "location": "PLAZA 170 BASEMENT",
+      "referenceNumber": "44115635517006 U",
+      "oldAccountNumber": "44115638017006.00"
+    },
+    {
+      "location": "LIFT PLAZA 171",
+      "referenceNumber": "44115635517104 U",
+      "oldAccountNumber": "0.00"
+    },
+    {
+      "location": "LIFT PLAZA 170",
+      "referenceNumber": "44115635517000 U",
+      "oldAccountNumber": "44115638017000.00"
+    }
+  ],
+  "guardian_developer": [
+    {
+      "location": "Plaza # 172 Basement",
+      "referenceNumber": "44563551721212.00",
+      "oldAccountNumber": "44563551721212.00"
+    },
+    {
+      "location": "Plaza # 172 3rd Floor",
+      "referenceNumber": "44115635517213.00",
+      "oldAccountNumber": "44115635517213.00"
+    },
+    {
+      "location": "Plaza # 172 2nd Floor",
+      "referenceNumber": "44115638017210.00",
+      "oldAccountNumber": "44115638017210.00"
+    },
+    {
+      "location": "Plaza # 172 1st Floor",
+      "referenceNumber": "44115635517211.00",
+      "oldAccountNumber": "44115635517211.00"
+    },
+    {
+      "location": "Plaza # 170 4th Floor",
+      "referenceNumber": "44115638017003.00",
+      "oldAccountNumber": "44115638017003.00"
+    }
+  ]
+}

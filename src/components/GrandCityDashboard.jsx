@@ -127,14 +127,58 @@ const GrandCityManagementComplete = () => {
   };
 
   // CRUD operations using API
+
+  // Map API field names (snake_case) to form field names (camelCase)
+  const mapApiToForm = (bill) => ({
+    companyName: bill.company_name || '',
+    buildingNumber: bill.building_number || '',
+    buildingName: bill.building_name || '',
+    floor: bill.floor || '',
+    unitNumber: bill.unit_number || '',
+    ownerId: bill.owner_id || '',
+    billType: bill.bill_type || '',
+    dueDate: bill.due_date ? bill.due_date.split('T')[0] : '',
+    billMonth: bill.bill_month || '',
+    status: bill.status || 'Pending',
+    billAmount: bill.bill_amount || '',
+    accountNumber: bill.account_number || '',
+    consumerNumber: bill.consumer_number || '',
+    customerId: bill.customer_id || '',
+    paidBy: bill.paid_by || 'Company',
+    referenceNumber: bill.reference_number || '',
+    notes: bill.notes || ''
+  });
+
+  // Map form field names (camelCase) to API field names (backend expects camelCase for PUT/POST)
+  const mapFormToApi = (formData) => ({
+    companyName: formData.companyName || '',
+    buildingNumber: formData.buildingNumber || '',
+    buildingName: formData.buildingName || '',
+    floor: formData.floor || '',
+    unitNumber: formData.unitNumber || '',
+    ownerId: formData.ownerId || null,
+    billType: formData.billType || '',
+    dueDate: formData.dueDate || '',
+    billMonth: formData.billMonth || '',
+    status: formData.status || 'Pending',
+    billAmount: formData.billAmount || 0,
+    accountNumber: formData.accountNumber || '',
+    consumerNumber: formData.consumerNumber || '',
+    customerId: formData.customerId || '',
+    paidBy: formData.paidBy || 'Company',
+    referenceNumber: formData.referenceNumber || '',
+    notes: formData.notes || ''
+  });
+
   const handleAddBill = async () => {
     try {
+      const apiData = mapFormToApi(billFormData);
       if (editingItem) {
-        const updated = await api.bills.update(editingItem.id, billFormData);
-        setBills((Array.isArray(bills) ? bills : []).map(bill => bill.id === editingItem.id ? { ...updated, ...billFormData } : bill));
+        const updated = await api.bills.update(editingItem.id, apiData);
+        setBills((Array.isArray(bills) ? bills : []).map(bill => bill.id === editingItem.id ? { ...updated, ...apiData } : bill));
       } else {
-        const newBill = await api.bills.create(billFormData);
-        setBills([...(Array.isArray(bills) ? bills : []), newBill]);
+        const newBill = await api.bills.create(apiData);
+        setBills([newBill, ...(Array.isArray(bills) ? bills : [])]);
       }
       setShowAddBillModal(false);
       setBillFormData({});
@@ -157,7 +201,7 @@ const GrandCityManagementComplete = () => {
 
   const handleEditBill = (bill) => {
     setEditingItem(bill);
-    setBillFormData(bill);
+    setBillFormData(mapApiToForm(bill));
     setShowAddBillModal(true);
   };
 

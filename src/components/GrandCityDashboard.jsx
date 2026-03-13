@@ -17,6 +17,7 @@ const GrandCityManagementComplete = () => {
 
   const [notifications, setNotifications] = useState([]);
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [notificationFilter, setNotificationFilter] = useState('overdue'); // 'overdue' or 'next7days'
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
   const [filterBuilding, setFilterBuilding] = useState('all');
@@ -318,6 +319,28 @@ const GrandCityManagementComplete = () => {
   const uniqueBuildings = [...new Set(safeBills.map(b => b.building_number))].sort();
   const billTypes = [...new Set(safeBills.map(b => b.bill_type))].sort();
 
+  // Notification bills - overdue and due in next 7 days
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const sevenDaysFromNow = new Date(today);
+  sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 7);
+
+  const overdueBillsList = safeBills.filter(bill => {
+    const dueDate = new Date(bill.due_date);
+    dueDate.setHours(0, 0, 0, 0);
+    return bill.status === 'Overdue' || (bill.status === 'Pending' && dueDate < today);
+  });
+
+  const billsDueIn7Days = safeBills.filter(bill => {
+    const dueDate = new Date(bill.due_date);
+    dueDate.setHours(0, 0, 0, 0);
+    return (bill.status === 'Pending' || bill.status === 'Overdue') &&
+           dueDate >= today &&
+           dueDate <= sevenDaysFromNow;
+  });
+
+  const notificationBills = notificationFilter === 'overdue' ? overdueBillsList : billsDueIn7Days;
+
   // Generate notifications
   useEffect(() => {
     const today = new Date();
@@ -478,6 +501,199 @@ const GrandCityManagementComplete = () => {
             </div>
           </div>
         )}
+
+        {/* Notifications Section */}
+        <div className="mb-6">
+          <button
+            onClick={() => setActiveTab(activeTab === 'notifications' ? 'dashboard' : 'notifications')}
+            className={`w-full bg-white/10 backdrop-blur-lg rounded-xl border border-white/20 overflow-hidden transition-all ${
+              activeTab === 'notifications' ? 'ring-2 ring-blue-500' : ''
+            }`}
+          >
+            <div className="flex items-center justify-between px-4 md:px-6 py-3 md:py-4">
+              <div className="flex items-center gap-3">
+                <Bell className="w-5 h-5 md:w-6 md:h-6 text-yellow-400" />
+                <span className="text-base md:text-lg font-semibold">Notifications</span>
+                {activeTab !== 'notifications' && overdueBillsList.length > 0 && (
+                  <span className="ml-2 px-2 py-1 bg-red-500 text-white text-xs font-bold rounded-full">
+                    {overdueBillsList.length}
+                  </span>
+                )}
+              </div>
+              <div className="flex items-center gap-2">
+                {activeTab === 'notifications' && (
+                  <span className="text-xs md:text-sm text-white/50">Click to collapse</span>
+                )}
+                <div className={`transform transition-transform ${activeTab === 'notifications' ? 'rotate-180' : ''}`}>
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            {/* Expanded Notifications Content */}
+            {activeTab === 'notifications' && (
+              <div className="border-t border-white/20 p-4 md:p-6">
+                {/* Notification Filter Controls */}
+                <div className="flex flex-wrap items-center gap-4 mb-6">
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={(e) => { e.stopPropagation(); setNotificationFilter('overdue'); }}
+                      className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                        notificationFilter === 'overdue'
+                          ? 'bg-red-500 text-white'
+                          : 'bg-white/10 text-white/70 hover:bg-white/20'
+                      }`}
+                    >
+                      Overdue Bills
+                      {overdueBillsList.length > 0 && (
+                        <span className="ml-2 px-2 py-0.5 bg-red-600 text-white text-xs font-bold rounded-full">
+                          {overdueBillsList.length}
+                        </span>
+                      )}
+                    </button>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); setNotificationFilter('next7days'); }}
+                      className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                        notificationFilter === 'next7days'
+                          ? 'bg-orange-500 text-white'
+                          : 'bg-white/10 text-white/70 hover:bg-white/20'
+                      }`}
+                    >
+                      Due in 7 Days
+                      {billsDueIn7Days.length > 0 && (
+                        <span className="ml-2 px-2 py-0.5 bg-orange-600 text-white text-xs font-bold rounded-full">
+                          {billsDueIn7Days.length}
+                        </span>
+                      )}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Notification Bills List - Desktop */}
+                {notificationBills.length > 0 ? (
+                  <>
+                    <div className="hidden lg:block overflow-x-auto">
+                      <table className="w-full border-collapse">
+                        <thead>
+                          <tr className="text-left border-b border-white/20">
+                            {['Type', 'Building', 'Floor', 'Owner', 'Customer ID', 'Due Date', 'Amount', 'Status', 'Actions'].map(header => (
+                              <th key={header} className="py-3 px-4 text-sm font-semibold text-white/70">{header}</th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {notificationBills.map(bill => (
+                            <tr key={bill.id} className="border-b border-white/10 hover:bg-white/5 transition-colors">
+                              <td className="py-3 px-4">
+                                <div className="flex items-center gap-2">
+                                  {getBillTypeIcon(bill.bill_type)}
+                                  <span className="font-medium">{bill.bill_type}</span>
+                                </div>
+                              </td>
+                              <td className="py-3 px-4">{bill.building_number} - {bill.building_name}</td>
+                              <td className="py-3 px-4">{bill.floor || '-'}</td>
+                              <td className="py-3 px-4">{getOwnerName(bill.owner_id)}</td>
+                              <td className="py-3 px-4 font-mono text-sm">{bill.customer_id}</td>
+                              <td className="py-3 px-4">{new Date(bill.due_date).toLocaleDateString()}</td>
+                              <td className="py-3 px-4 font-bold">Rs. {parseFloat(bill.bill_amount || 0).toLocaleString()}</td>
+                              <td className="py-3 px-4">
+                                <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                                  bill.status === 'Paid' ? 'bg-green-500/20 text-green-300' :
+                                  bill.status === 'Partial' ? 'bg-yellow-500/20 text-yellow-300' :
+                                  bill.status === 'Overdue' ? 'bg-red-500/20 text-red-300' :
+                                  'bg-blue-500/20 text-blue-300'
+                                }`}>
+                                  {bill.status}
+                                </span>
+                              </td>
+                              <td className="py-3 px-4">
+                                <div className="flex gap-2">
+                                  <button
+                                    onClick={(e) => { e.stopPropagation(); handleEditBill(bill); }}
+                                    className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                                  >
+                                    <Edit2 className="w-4 h-4 text-blue-300" />
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+
+                    {/* Notification Bills List - Mobile */}
+                    <div className="lg:hidden space-y-4">
+                      {notificationBills.map(bill => (
+                        <div key={bill.id} className="bg-white/5 rounded-lg p-4 border border-white/10">
+                          <div className="flex items-start justify-between mb-3">
+                            <div className="flex items-center gap-2">
+                              {getBillTypeIcon(bill.bill_type)}
+                              <div>
+                                <div className="text-lg font-bold">{bill.bill_type}</div>
+                                <div className="text-sm text-white/70">Building {bill.building_number} - {bill.building_name}</div>
+                              </div>
+                            </div>
+                            <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                              bill.status === 'Paid' ? 'bg-green-500/20 text-green-300' :
+                              bill.status === 'Partial' ? 'bg-yellow-500/20 text-yellow-300' :
+                              bill.status === 'Overdue' ? 'bg-red-500/20 text-red-300' :
+                              'bg-blue-500/20 text-blue-300'
+                            }`}>
+                              {bill.status}
+                            </span>
+                          </div>
+
+                          <div className="space-y-2 text-sm mb-3">
+                            <div className="flex justify-between">
+                              <span className="text-white/70">Floor:</span>
+                              <span>{bill.floor || 'N/A'}</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-white/70">Owner:</span>
+                              <span className="font-semibold">{getOwnerName(bill.owner_id)}</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-white/70">Customer ID:</span>
+                              <span className="font-mono text-xs">{bill.customer_id}</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-white/70">Due Date:</span>
+                              <span>{new Date(bill.due_date).toLocaleDateString()}</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-white/70">Amount:</span>
+                              <span className="text-lg font-bold">Rs. {parseFloat(bill.bill_amount || 0).toLocaleString()}</span>
+                            </div>
+                          </div>
+
+                          <div className="flex gap-2 pt-3 border-t border-white/10">
+                            <button
+                              onClick={(e) => { e.stopPropagation(); handleEditBill(bill); }}
+                              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-blue-500/20 text-blue-300 rounded-lg hover:bg-blue-500/30 transition-colors"
+                            >
+                              <Edit2 className="w-4 h-4" />
+                              Edit
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-center py-12">
+                    <Bell className="w-16 h-16 text-white/30 mx-auto mb-4" />
+                    <p className="text-white/50 text-lg">
+                      {notificationFilter === 'overdue' ? 'No overdue bills' : 'No bills due in the next 7 days'}
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
+          </button>
+        </div>
 
         {/* Tabs Navigation */}
         <div className="bg-white/10 backdrop-blur-lg rounded-xl mb-6 border border-white/20 overflow-x-auto">

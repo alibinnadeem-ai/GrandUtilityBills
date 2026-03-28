@@ -220,7 +220,7 @@ const GrandCityManagementComplete = () => {
     try {
       if (editingItem) {
         const updated = await api.owners.update(editingItem.id, ownerFormData);
-        setOwners((Array.isArray(owners) ? owners : []).map(owner => owner.id === editingItem.id ? { ...updated, ...ownerFormData } : owner));
+        setOwners((Array.isArray(owners) ? owners : []).map(owner => owner.id === editingItem.id ? updated : owner));
       } else {
         const newOwner = await api.owners.create(ownerFormData);
         setOwners([...(Array.isArray(owners) ? owners : []), newOwner]);

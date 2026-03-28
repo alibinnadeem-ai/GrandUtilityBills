@@ -97,7 +97,7 @@ export default async function handler(req, res) {
 
       const result = await pool.query(
         'INSERT INTO owners (name, mobile, email, buildings, notes) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-        [name, mobile, email, JSON.stringify(buildingsArray), notes]
+        [name, mobile, email, buildingsArray, notes]
       );
 
       const newOwner = result.rows[0];
@@ -123,7 +123,7 @@ export default async function handler(req, res) {
 
       const result = await pool.query(
         'UPDATE owners SET name = $1, mobile = $2, email = $3, buildings = $4, notes = $5 WHERE id = $6 RETURNING *',
-        [name, mobile, email, JSON.stringify(buildingsArray), notes, id]
+        [name, mobile, email, buildingsArray, notes, id]
       );
 
       if (result.rows.length === 0) {
@@ -159,6 +159,18 @@ export default async function handler(req, res) {
 }
 
 async function getRequestBody(req) {
+  if (req.body && typeof req.body === 'object') {
+    return req.body;
+  }
+
+  if (typeof req.body === 'string') {
+    try {
+      return JSON.parse(req.body || '{}');
+    } catch {
+      return {};
+    }
+  }
+
   return new Promise((resolve) => {
     let data = '';
     req.on('data', (chunk) => { data += chunk; });
